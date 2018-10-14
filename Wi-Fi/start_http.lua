@@ -10,8 +10,11 @@ end)
 
 httpServer:use('/config', function(req, res)
     if req.query.ssid ~= nil and req.query.pwd ~= nil then
-        wifi.sta.config(req.query.ssid, req.query.pwd)
-        print("connect wifi")
+        local cfg = {}
+        cfg.ssid = req.query.ssid
+        cfg.pwd = req.query.pwd
+        wifi.sta.config(cfg)
+        print("connect wifi ssid: "..cfg.ssid.." pwd: "..cfg.pwd)
         status = 'STA_CONNECTING'
         tmr.alarm(TMR_WIFI, 1000, tmr.ALARM_AUTO, function()
             if status ~= 'STA_CONNECTING' then

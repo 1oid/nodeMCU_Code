@@ -52,7 +52,7 @@
         function submit() {
             var current_select_ssid = document.getElementById("ssid");
             var current_select_passowrd = document.getElementById("password");
-            var target = "/config?ssid="+current_select_ssid+"&pwd="+current_select_passowrd;
+            var target = "/config?ssid="+current_select_ssid.value+"&pwd="+current_select_passowrd.value;
             ajax.get(target, function(result) {
                 alert(JSON.parse(result).status);
             });
