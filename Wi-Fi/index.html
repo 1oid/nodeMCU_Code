@@ -40,6 +40,8 @@
 
         function scanap() {
             ajax.get("/scanap", function(result) {
+                result = result.replace(",}", "}");
+                console.log(result);
                 var json_data = JSON.parse(result);
                 for(var data in json_data) {
                     getData(data);

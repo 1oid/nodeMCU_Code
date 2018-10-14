@@ -32,7 +32,6 @@ httpServer:use('/scanap', function(req, res)
             aptable[ssid] = channel
         end
         local retResult = table_to_string(aptable)
-        res:type('application/json')
         res:send(retResult)
     end)
 end)
