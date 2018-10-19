@@ -5,7 +5,11 @@ httpServer:listen(80)
 TMR_WIFI = 4
 
 httpServer:use('/', function(req, res)
-        res:sendFile("index.html")
+        if wifi.getmode() == 3 then
+            res:sendFile("index.html")
+        else
+            res:send("<h1>Hello,nodeMCU</h1>")
+        end
 end)
 
 httpServer:use('/config', function(req, res)
@@ -22,6 +26,7 @@ httpServer:use('/config', function(req, res)
             print(wifi.sta.getip())
             if wifi.sta.getip() ~= nil then
                 res:send('{"status":"connect success."}')
+                wifi.setmode(wifi.STATION)
                 tmr.stop(TMR_WIFI)
             else
                 res:send('{"status":"connect fail."}')
